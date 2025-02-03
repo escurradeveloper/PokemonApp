@@ -48,6 +48,10 @@ Esta aplicación tiene sus clases y/o carpetas de acuerdo a dicha arquitectura.
 
 <img width="487" alt="viper-arquitectura-de-la-app" src="https://github.com/user-attachments/assets/e23caa89-a873-4cd2-9811-f8077b4de376" />
 
+Video Explicativo:
+
+https://www.youtube.com/watch?v=BB6bgah8yWY
+
 
 Capturas de la aplicación: 
 
