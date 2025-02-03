@@ -5,7 +5,9 @@ El código fuente se puede descargar en el branch "develop". Esta aplicación co
 Tecnologías: 
 
 UIKit. 
+
 Swift. 
+
 xCode 16.0. 
 Switf Package Manager en donde se usa la librería AlamofireImage para la visualización de las imagenes de los pokemones.
 Design Pattern: Inyección de dependencia, patrón repository para la data local, patrón singleton, patron builder para construir paso a paso los componentes de la UI como labels, imagenes, etc. 
