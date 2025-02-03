@@ -21,7 +21,7 @@ struct PokemonInteractor: PokemonInteractorProtocol {
     func executeServices() async -> [PokemonModel] {
         let localPokemon = await pokemonRepository.getListPokemon()
         do {
-            let pokemon = try await pokemonDataManager.executeServices(numberOfPokemons: 151)
+            let pokemon = try await pokemonDataManager.executeServices()
             await pokemonRepository.saveListPokemon(pokemon)
             return pokemon
         } catch {

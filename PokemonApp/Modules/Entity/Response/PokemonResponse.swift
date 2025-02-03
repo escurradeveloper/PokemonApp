@@ -10,7 +10,7 @@ struct ListPokemonResponse: Decodable {
     
     func convertToModel() -> [PokemonModel] {
         results.map {
-            $0.convertToModel() //map for transform to model
+            $0.convertToModel() /// map for transform to model
         }
     }
 }
@@ -35,7 +35,6 @@ struct PokemonResponse: Decodable {
         id = extractedID
     }
     
-    //fileprivate static func extractPokemonID(from url: URL) -> Int? {
     static func extractPokemonID(from url: URL) -> Int? {
         let components = url.path.split(separator: "/")
         guard let lastComponent = components.last, let id = Int(lastComponent) else {

@@ -5,37 +5,35 @@
 
 import Foundation
 
-//final class Pokemon: Hashable, Sendable
 final class PokemonModel: Hashable, Sendable {
     let id: Int
     let name: String
-    
-    var imageUrl: URL? {
-        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork//\(id).png")
-    }
-    
-    var number: String {
-        String(format: "#%03d", id)
-    }
-    
-    let detail: PokemonDetailStore = PokemonDetailStore()
-    let evolutionChain: PokemonEvolutionChainStore = PokemonEvolutionChainStore()
     
     init(id: Int, name: String) {
         self.id = id
         self.name = name
     }
     
+    var imageUrl: URL? {
+        URL(string: "\(Constants.Urls.imagePokemonUrl)\(id)\(Constants.ExtensionImage.png)")
+    }
+    
+    var number: String {
+        String(format: .formatted, id)
+    }
+    
+    /// for update pokemon details and evolutions
+    let detail: PokemonDetailStore = PokemonDetailStore()
+    let evolutionChain: PokemonEvolutionChainStore = PokemonEvolutionChainStore()
+    
     func getColor() async -> String {
-        //let pokemonColor = GetPokemonColorByType()
         let pokemonColor = PokemonColor()
-        let type = await detail.detail?.types.first ?? .empty
+        let type = await detail.pokemonDetailModel?.types.first ?? .empty
         let color = pokemonColor.getColor(type: type)
         return color
     }
     
     func getColorByType(type: String) -> String {
-        //let pokemonColor = GetPokemonColorByType()
         let pokemonColor = PokemonColor()
         return pokemonColor.getColor(type: type)
     }
@@ -50,7 +48,11 @@ final class PokemonModel: Hashable, Sendable {
     }
 }
 
-//struct GetPokemonColorByType
+struct PokemonEvolutionChainModel {
+    let pokemon: PokemonModel
+    let evolutions: [PokemonEvolutionChainModel]
+}
+
 struct PokemonColor {
     func getColor(type: String) -> String {
         switch type {
@@ -96,11 +98,13 @@ struct PokemonColor {
     }
 }
 
+/// actor = class
+/// for update pokemon details and evolutions
 actor
 PokemonDetailStore {
-    private(set) var detail: PokemonDetailModel?
-    func updatePokemonDetailModel(detail: PokemonDetailModel) {
-        self.detail = detail
+    private(set) var pokemonDetailModel: PokemonDetailModel?
+    func updatePokemonDetailModel(pokemonDetailModel: PokemonDetailModel) {
+        self.pokemonDetailModel = pokemonDetailModel
     }
 }
 
@@ -110,9 +114,4 @@ PokemonEvolutionChainStore {
     func updatePokemonEvolutionChainModel(chain: PokemonEvolutionChainModel?) {
         self.chain = chain
     }
-}
-
-struct PokemonEvolutionChainModel {
-    let pokemon: PokemonModel
-    let evolutions: [PokemonEvolutionChainModel]
 }

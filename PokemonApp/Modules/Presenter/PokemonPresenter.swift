@@ -3,33 +3,40 @@
 //  PokemonApp
 //
 
+/// Interface Segregation in protocols
 @MainActor
-protocol PokemonPresenterProtocol {
-    func getListPokemon() async
-    func searchPokemon(name: String)
-    func selectPokemon(index: Int)
+protocol PokemonPresenterVariablesProtocol {
     var loadPokemon: (([PokemonModel]) -> Void)? { get set }
     var searchEmptyPokemon: ((Bool) -> Void)? { get set }
     var loadProgress: ((Bool) -> Void)? { get set }
     var dataEmpty: (() -> Void)? { get set }
 }
 
-class PokemonPresenter: PokemonPresenterProtocol {
+@MainActor
+protocol PokemonPresenterProtocol {
+    func getListPokemon() async
+    func searchPokemon(pokemonName: String)
+    func goToPokemon(pokemonIndex: Int)
+}
+
+class PokemonPresenter: PokemonPresenterProtocol, PokemonPresenterVariablesProtocol {
     var loadPokemon: (([PokemonModel]) -> Void)? = nil
     var searchEmptyPokemon: ((Bool) -> Void)? = nil
     var loadProgress: ((Bool) -> Void)? = nil
     var dataEmpty: (() -> Void)? = nil
     private var listPokemon: [PokemonModel] = []
     private var arrayFilterPokemon: [PokemonModel] = []
-    private let pokemonInteractor: PokemonInteractorProtocol
+    private let interactor: PokemonInteractorProtocol
+    private let router: PokemonRouterProtocol
     
-    init(pokemonInteractor: PokemonInteractorProtocol) {
-        self.pokemonInteractor = pokemonInteractor
+    init(interactor: PokemonInteractorProtocol, router: PokemonRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
     }
     
     func getListPokemon() async {
         loadProgress?(true)
-        listPokemon = await pokemonInteractor.executeServices()
+        listPokemon = await interactor.executeServices()
         loadProgress?(false)
         if listPokemon.isEmpty {
             dataEmpty?()
@@ -39,23 +46,23 @@ class PokemonPresenter: PokemonPresenterProtocol {
         }
     }
     
-    func searchPokemon(name: String) {
-        if name.isEmpty {
+    func searchPokemon(pokemonName: String) {
+        if pokemonName.isEmpty {
             listPokemon = arrayFilterPokemon
             searchEmptyPokemon?(false)
         } else {
-            let filteredPokemon = arrayFilterPokemon.filter { $0.name.lowercased().contains(name.lowercased()) }
+            let filteredPokemon = arrayFilterPokemon.filter { $0.name.lowercased().contains(pokemonName.lowercased()) }
             listPokemon = filteredPokemon
             searchEmptyPokemon?(filteredPokemon.isEmpty)
         }
         loadPokemon?(listPokemon)
     }
     
-    func selectPokemon(index: Int) {
-        guard index >= 0 && index < listPokemon.count else {
+    func goToPokemon(pokemonIndex: Int) {
+        guard pokemonIndex >= 0 && pokemonIndex < listPokemon.count else {
             return
         }
-        let pokemon = listPokemon[index]
-        print(pokemon)
+        let pokemon = listPokemon[pokemonIndex]
+        router.routeToDetailPokemon(pokemon: pokemon)
     }
 }

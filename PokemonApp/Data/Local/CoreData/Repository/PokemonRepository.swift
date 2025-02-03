@@ -6,6 +6,7 @@
 import CoreData
 import Foundation
 
+/// Use Repository pattern
 protocol PokemonCoreDataRepositoryProtocol: Sendable {
     func saveListPokemon(_ pokemons: [PokemonModel]) async
     func getListPokemon() async -> [PokemonModel]
@@ -42,7 +43,7 @@ final class PokemonCoreDataRepository: PokemonCoreDataRepositoryProtocol {
         let pokemonEntity = PokemonCoreData.shared.insertManagedObject(PokemonEntity.self)
         pokemonEntity.id = Int16(pokemon.id)
         pokemonEntity.name = pokemon.name
-        let detail = await pokemon.detail.detail
+        let detail = await pokemon.detail.pokemonDetailModel
         pokemonEntity.weight = Int16(detail?.weight ?? 0)
         pokemonEntity.height = Int16(detail?.height ?? 0)
         if let types = detail?.types {

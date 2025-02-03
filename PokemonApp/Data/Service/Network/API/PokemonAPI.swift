@@ -6,7 +6,7 @@
 import Foundation
 
 protocol PokemonAPIProtocol: Sendable {
-    func getListPokemon(limit: Int, offset: Int) async -> Result<[PokemonModel], Error>
+    func getListPokemon() async -> Result<[PokemonModel], Error>
     func getPokemonDetail(pokemonId: Int) async -> Result<PokemonDetailModel, Error>
     func getPokemonEvolutionChain(pokemonId: Int) async -> Result<PokemonEvolutionChainModel, Error>
 }
@@ -15,17 +15,21 @@ struct PokemonAPI: PokemonAPIProtocol {
     private let session: URLSessionProtocol
     
     enum Services {
-        case getListPokemon(limit: Int, offset: Int)
+        case getListPokemon
         case getDetailPokemon(id: Int)
         case getSpecies(id: Int)
         
-        var baseUrl: String { Constants.Urls.baseUrl }
-        var versionApi: String { Constants.Urls.versionApi }
+        var baseUrl: String {
+            Constants.Urls.baseUrl
+        }
+        var versionApi: String {
+            Constants.ApiVersion.version
+        }
         
         var path: String {
             switch self {
-            case .getListPokemon(limit: let limit, offset: let offset):
-                return  "pokemon?limit=\(limit)&offset=\(offset)"
+            case .getListPokemon:
+                return  "pokemon?limit=151"
             case .getDetailPokemon(id: let id):
                 return "pokemon/\(id)"
             case .getSpecies(id: let id):
@@ -51,9 +55,9 @@ struct PokemonAPI: PokemonAPIProtocol {
         return data
     }
     
-    func getListPokemon(limit: Int, offset: Int) async -> Result<[PokemonModel], Error> {
+    func getListPokemon() async -> Result<[PokemonModel], Error> {
         do {
-            let data = try await fetchData(from: PokemonAPI.Services.getListPokemon(limit: limit, offset: offset).endpointURLFull)
+            let data = try await fetchData(from: PokemonAPI.Services.getListPokemon.endpointURLFull)
             let decoder = JSONDecoder()
             let pokemonResponse = try decoder.decode(ListPokemonResponse.self, from: data)
             return .success(pokemonResponse.convertToModel())

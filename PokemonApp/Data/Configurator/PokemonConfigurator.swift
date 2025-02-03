@@ -6,6 +6,7 @@
 import Foundation
 import CoreData
 
+/// Configure data service and data local
 struct PokemonConfigurator {
     static func getPokemonService() -> PokemonAPIProtocol {
         return PokemonAPI()
@@ -16,7 +17,7 @@ struct PokemonConfigurator {
     }
     
     @MainActor
-    static func setupPokemonCoreData() {
+    static func configurePokemonCoreData() {
         let pokemonCoreData = PokemonCoreData.shared
         print("\(pokemonCoreData)")
     }

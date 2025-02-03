@@ -10,7 +10,7 @@ extension PokemonEntity: @unchecked Sendable {
             .compactMap { $0.name } ?? []
         let detail = PokemonDetailModel(weight: Int(weight), height: Int(height), types: types)
         let pokemon = PokemonModel(id: Int(id), name: name ?? .empty)
-        await pokemon.detail.updatePokemonDetailModel(detail: detail)
+        await pokemon.detail.updatePokemonDetailModel(pokemonDetailModel: detail)
         return pokemon
     }
 }

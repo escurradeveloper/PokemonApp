@@ -18,11 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = scene as? UIWindowScene else { return }
+        PokemonConfigurator.configurePokemonCoreData()
         let window = UIWindow(windowScene: windowScene)
-        let coordinator = ListPokemonCoordinator(window: window)
+        let router = PokemonRouter(window: window)
         self.window = window
         Constants.GlobalSettings.window = self.window ?? UIWindow()
-        coordinator.initListPokemon()
+        router.configureListPokemon()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

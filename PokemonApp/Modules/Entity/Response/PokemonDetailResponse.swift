@@ -11,7 +11,7 @@ struct PokemonDetailResponse: Decodable {
     let types: [PokemonTypeResponse]
     
     func convertToModel() -> PokemonDetailModel {
-        let types = types.map(\.type.name) //map for transform to model
+        let types = types.map(\.type.name) /// map for transform to model
         return PokemonDetailModel(weight: weight,
                                   height: height,
                                   types: types)
@@ -46,8 +46,7 @@ struct EvolutionNodeResponse: Decodable {
     
     func convertToModel() -> PokemonEvolutionChainModel {
         let pokemon = pokemon.convertToModel()
-        let evolutionChain = evolvesTo.map { $0.convertToModel()
-        }
+        let evolutionChain = evolvesTo.map { $0.convertToModel() } /// map for transform to model
         return PokemonEvolutionChainModel(pokemon: pokemon, evolutions: evolutionChain)
     }
 }

@@ -3,4 +3,14 @@
   PokemonApp
 */
 
-"accept" = "Aceptar";
+"pokemon_app" = "Pokemon App";
+"cancel_button" = "Cancelar";
+"search_pokemon" = "Buscar Pokemon";
+"list_empty" = "Por favor escribir un pokemon de esta lista para poder buscarlo";
+"retry_button" = "Volver a intentar";
+"error_description" = "En estos momentos hay algunos inconvenientes en la aplicación, reintente por favor";
+"title_pokemon" = "Pokemon";
+"title_evolutions" = "Evoluciones";
+"without_any_evolution" = "Sin ninguna evolución";
+"height_pokemon" = "Altura";
+"weight_pokemon" = "Peso";

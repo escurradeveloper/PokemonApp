@@ -3,6 +3,8 @@
 //  PokemonApp
 //
 
+/// Use DataManager for execute all service in this project
+/// actor = class
 actor
 PokemonDataManager {
     private var pokemonModel: [PokemonModel] = []
@@ -12,8 +14,8 @@ PokemonDataManager {
         self.pokemonAPI = pokemonAPI
     }
 
-    func executeServices(numberOfPokemons: Int) async throws -> [PokemonModel] {
-        pokemonModel = try await getListPokemon(numberOfPokemons: numberOfPokemons)
+    func executeServices() async throws -> [PokemonModel] {
+        pokemonModel = try await getListPokemon()
         try await withThrowingTaskGroup(of: Void.self) { group in
             for pokemon in pokemonModel {
                 group.addTask {
@@ -26,8 +28,8 @@ PokemonDataManager {
         return pokemonModel
     }
 
-    private func getListPokemon(numberOfPokemons: Int) async throws -> [PokemonModel] {
-        let result = await pokemonAPI.getListPokemon(limit: numberOfPokemons, offset: 0)
+    private func getListPokemon() async throws -> [PokemonModel] {
+        let result = await pokemonAPI.getListPokemon()
         switch result {
         case .success(let pokemon):
             return pokemon
@@ -41,7 +43,7 @@ PokemonDataManager {
         let result = await pokemonAPI.getPokemonDetail(pokemonId: pokemon.id)
         switch result {
         case .success(let pokemonDetail):
-            await pokemon.detail.updatePokemonDetailModel(detail: pokemonDetail)
+            await pokemon.detail.updatePokemonDetailModel(pokemonDetailModel: pokemonDetail)
         case .failure(let error):
             print("Error failed: \(error.localizedDescription)")
             throw error
