@@ -1,34 +1,34 @@
 # Proyecto de IOS con Swift UIKit consumiendo la API de pokemons
-Aplicación Pokemon App. Aplicación móvil en IOS con Swift en UIKit.
-El código fuente se puede descargar en el branch "develop". Esta aplicación consiste en consumir un listado de la API de Pokemon. Podemos buscar por el nombre del pokemon y ver su detalle en donde se encuentra su información como peso, altura, tipos y evoluciones.
+Aplicación Pokemon App. Aplicación móvil en IOS con Swift en UIKit. 
+El código fuente se puede descargar en el branch "develop". Esta aplicación consiste en consumir un listado de la API de Pokemon. Podemos buscar por el nombre del pokemon y ver su detalle en donde se encuentra su información como peso, altura, tipos y evoluciones. 
 
-Tecnologías:
+Tecnologías: 
 
-UIKit
-Swift
-xCode 16.0
+UIKit. 
+Swift. 
+xCode 16.0. 
 Switf Package Manager en donde se usa la librería AlamofireImage para la visualización de las imagenes de los pokemones.
-Design Pattern: Inyección de dependencia, patrón repository para la data local, patrón singleton, patron builder para construir paso a paso los componentes de la UI como labels, imagenes, etc.
-Vistas programáticas - Constraints
-UITableViewDiffableDataSource
-UISearchController
-UIView, UILabel, UIStackView, UIScrollView
-Pruebas Unitarias - Unit Tests
-CoreData para el almacenamiento local
+Design Pattern: Inyección de dependencia, patrón repository para la data local, patrón singleton, patron builder para construir paso a paso los componentes de la UI como labels, imagenes, etc. 
+Vistas programáticas - Constraints. 
+UITableViewDiffableDataSource. 
+UISearchController. 
+UIView, UILabel, UIStackView, UIScrollView. 
+Pruebas Unitarias - Unit Tests. 
+CoreData para el almacenamiento local. 
 
-Arquitectura VIPER:
-V = Vista (interfaz de usuario)
-I = Interactor (llamada a servicios)
-P = Presenter (lógica de negocio)
-E = Entity (entidades, modelos)
-R = Router (navegación entre pantallas)
+Arquitectura VIPER: 
+V = Vista (interfaz de usuario). 
+I = Interactor (llamada a servicios). 
+P = Presenter (lógica de negocio). 
+E = Entity (entidades, modelos). 
+R = Router (navegación entre pantallas). 
 
-Esta aplicación tiene sus clases y/o carpetas de acuerdo a dicha arquitectura.
+Esta aplicación tiene sus clases y/o carpetas de acuerdo a dicha arquitectura. 
 
 <img width="487" alt="viper-arquitectura-de-la-app" src="https://github.com/user-attachments/assets/e23caa89-a873-4cd2-9811-f8077b4de376" />
 
 
-Capturas de la aplicación:
+Capturas de la aplicación: 
 
 <img width="210" alt="view1" src="https://github.com/user-attachments/assets/d731fd87-4286-40f4-89e2-48540672f133" />
 <img width="217" alt="view2" src="https://github.com/user-attachments/assets/827ce18b-56f4-40b7-83e9-f7358885ebfc" />
