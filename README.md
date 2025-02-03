@@ -5,6 +5,7 @@ El código fuente se puede descargar en el branch "develop".
 
 Esta aplicación consiste en consumir un listado de la API de Pokemon. Podemos buscar por el nombre del pokemon y ver su detalle en donde se encuentra su información como peso, altura, tipos y evoluciones. 
 
+
 Tecnologías: 
 
 UIKit. 
