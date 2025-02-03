@@ -9,21 +9,36 @@ UIKit.
 Swift. 
 
 xCode 16.0. 
+
 Switf Package Manager en donde se usa la librería AlamofireImage para la visualización de las imagenes de los pokemones.
+
 Design Pattern: Inyección de dependencia, patrón repository para la data local, patrón singleton, patron builder para construir paso a paso los componentes de la UI como labels, imagenes, etc. 
+
 Vistas programáticas - Constraints. 
+
 UITableViewDiffableDataSource. 
+
 UISearchController. 
+
 UIView, UILabel, UIStackView, UIScrollView. 
+
 Pruebas Unitarias - Unit Tests. 
+
 CoreData para el almacenamiento local. 
 
+
 Arquitectura VIPER: 
+
 V = Vista (interfaz de usuario). 
+
 I = Interactor (llamada a servicios). 
+
 P = Presenter (lógica de negocio). 
+
 E = Entity (entidades, modelos). 
+
 R = Router (navegación entre pantallas). 
+
 
 Esta aplicación tiene sus clases y/o carpetas de acuerdo a dicha arquitectura. 
 
